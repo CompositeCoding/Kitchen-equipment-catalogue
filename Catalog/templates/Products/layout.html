@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link type="text/css" href="{% static 'Products/css/style.css' %}" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <title>Van der Vliet Professionele Keukenapparatuur</title>
+
+</head>
+
+<body>
+
+  <div id="page-container">
+    <div id='content-wrap'>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+            <div class="row">
+              <div class="col-9">
+                  <a href="{% url 'Index' %}"> <img class="img-fluid vandervlietlogo" src="{% static 'Products/media/VanderVliet.png' %}"  alt=""></a>
+              </div>
+              <div class="col-3">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class=" navbar-toggler-icon"></span>  </button>
+              </div>
+            </div>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                      <li class="nav-item active">
+                          <a class="nav-link active" href="{% url 'Giorik' %}">Giorik <span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link active" href="{% url 'Olis' %}">Olis</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link active" href="{% url 'Contact' %}">Contact</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link active" href="{% url 'Search' %}">Zoeken</a>
+                      </li>
+                    </ul>
+
+
+                    <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'Klanten' %}">Klantomgeving</a>
+                    </li>
+                      <li class="nav-item">
+                          <a class="nav-link active" href="{% url 'Logout' %}">Logout</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link active" href=""><h5>Welkom {{user.username}}!</h4></a>
+                      </li>
+
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'Klanten' %}">Klantomgeving</a>
+                    </li>
+                      <li class="nav-item">
+                          <a class="nav-link active" href="{% url 'Login' %}">Login</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link active" href="{% url 'Register' %}">Registreer</a>
+                      </li>
+
+                    {% endif %}
+                    </ul>
+
+                      </div>
+                  </nav>
+
+
+
+        {% block content %}
+        {%  endblock %}
+
+
+      <!-- <footer class="footer" >
+          <div class="container">
+              <div class="box footer-address">
+                  Van der Vliet
+                  <br> Professionele Keukenapparatuur
+                  <br> Huis ter Heideweg 11, 3705 MA Zeist
+                  <br>
+                  <i class="fa fa-phone"></i><a href="tel:0306925915">030 692 59 15</a>
+                  <br>
+                  <i class="fa fa-envelope-o"></i><a href="mailto:info@vandervliet.nl">info@vandervliet.nl</a>
+                  <br>
+              </div>
+          </div>
+      </footer> -->
+
+
+</div>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</html>

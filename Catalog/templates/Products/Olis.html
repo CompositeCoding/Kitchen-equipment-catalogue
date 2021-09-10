@@ -1,0 +1,302 @@
+{% extends 'Products/layout.html' %}
+{% load static %}
+{% block content %}
+<nav class="navbar navbar-expand-lg productnav">
+    <div class="container">
+        <div class="dropdown">
+            <button class="btn btn-danger m-0 pt-2" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">650</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                {% for b in 650L %}
+                <a class="dropdown-item" href="{% url 'Olis' '650' b %}">{{b}}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-danger  m-0 p-2" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">700</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                {% for b in 700L %}
+                <span style="font-size: 14px;"><a class="dropdown-item mt-0 mb-0" href="{% url 'Olis' '700' b %}">{{b}}</a></span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-danger  m-0 p-2" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">900</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                {% for b in 900L %}
+                <a class="dropdown-item" href="{% url 'Olis' '900' b %}">{{b}}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-danger  m-0 p-2 "type="button" id="dropdownMenu1" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">XXL</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                {% for b in XXL %}
+                <a class="dropdown-item" href="{% url 'Olis' 'XXL' b %}">{{b}}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="btn-group  dropdown dropleft">
+            <button class="btn btn-danger m-0 p-2" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">DropIn</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                {% for b in drop %}
+                <a class="dropdown-item" href="{% url 'Olis' 'dropin' b %}" >{{b}}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</nav>
+
+{% if query %}
+<div class="container-fluid ">
+    <div class="container text-center mt-5 mb-5">
+        <h1>{{Cat}}</h1>
+        {% if user.is_authenticated %}
+          <h5 style="{display: inline}"> Prijzen zijn exclusief btw </h5>
+        {% else %}
+        <h5 style="{display: inline}"> <i>Log in om prijzen te zien</i> </h5>
+        {% endif %}
+    </div>
+    <div class="container-fluid d-none d-md-block">
+        <div class="row ">
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2 ml-xl-auto ">
+            </div>
+            <div class="col-12 col-sm-12 col-md-10 col-lg-10  col-xl-8 ">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
+                        <h5><strong>kW + Voltage:</strong></h5>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                        <h5><strong>Aansluiting:</strong></h5>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-1">
+                        <h5><strong>Inhoud:</strong></h5>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                        <h5><strong>Afmetingen BxDxH:</strong></h5>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-1 col-lg-1 col-xl-1">
+                        <h5><strong>Prijs:</strong></h5>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                        <h5><strong>Extra Info:</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {% for object in query %}
+    <div class=" bt-2 mt-1 pt-1">
+        <hr style="width:80%;">
+    </div>
+    <div class="container-fluid ">
+        <div class="row pt-5">
+            <div class=" pl-5 col-12 col-sm-12 col-md-2 col-lg-2  col-xl-2 ml-xl-auto">
+                    <a href="{% url 'OlisProduct' object.Typenummer %}"><img class="img-fluid productimage" src="{%static 'Products/productimageOlis/'%}{{object.Typenummer}}.jpg"  alt="" ></a>
+                <a href="{% url 'OlisProduct' object.Typenummer %}"><h5 class="pl-4 pb-5 "><strong>{{object.Typenummer}}</strong></h5></a>
+            </div>
+            <div class="col-12 col-sm-12 col-md-10 col-lg-10  col-xl-8 ">
+                <div class="row pt-3">
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-2 ">
+                        <div class="row">
+                            <div class="pl-4 col-7 col-sm-7 d-md-none">
+                                <h5><strong>kW + Voltage:</strong></h5>
+                            </div>
+                            <div class="col-5 col-sm-5 col-md-12">
+                                {% if object.kW == ' ' %}
+                                  {{object.kW}}
+                                {% else %}
+                                <h5>{{object.kW}} kW</h5>
+                                {% endif %}
+                                {% if object.Voltage == None %}
+                                {% else %}
+                                <h5>{{object.Voltage}} V</h5>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 ">
+                        <div class="row">
+                            <div class="pl-4 col-7 col-sm-7 d-md-none">
+                                <h5><strong>Aansluiting:</strong></h5>
+                            </div>
+                            <div class="col-5 col-sm-5 col-md-12">
+                                {% if object.Aansluiting == 'nan' %}
+                                <h5></h5>
+                                {% elif object.Aansluiting == 'Elektrisch' %}
+                                <h5><i class="fa fa-bolt"></i> {{object.Aansluiting}}</h5>
+                                {% elif object.Aansluiting == 'Gas' %}
+                                <h5><i class="fa fa-fire"></i> {{object.Aansluiting}}</h5>
+                                {% else %}
+                                <h5> <i class="fa fa-fire"></i> <i class="fa fa-bolt"></i>  {{object.Aansluiting}}</h5>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-1 ">
+                        <div class="row">
+                            <div class="pl-4 col-7 col-sm-7 d-md-none">
+                                <h5><strong>Inhoud:</strong></h5>
+                            </div>
+                            <div class="col-5 col-sm-5 col-md-12">
+                                {% if object.Inhoud == 'nan' %}
+                                <h5></h5>
+                                {% else %}
+                                <h5>{{object.Inhoud}}</h5>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2   ">
+                        <div class="row">
+                            <div class="pl-4 col-7 col-sm-7 d-md-none">
+                                <h5><strong>Afmetingen B+D+H:</strong></h5>
+                            </div>
+                            <div class="col-5 col-sm-5 col-md-12">
+                              {% if object.Breedte == 'nan' %}
+                                 <h5></h5>
+                              {% else %}
+                              <h5 style='display:inline;'>{{object.Breedte}} x </h5>
+                              {% endif %}
+                              {% if object.Diepte == 'nan' %}
+                              <h5></h5>
+                              {% else %}
+                              <h5 style='display:inline;'> {{object.Diepte}} x  </h5>
+                              {% endif %}
+                              {% if object.Hoogte == 'nan' %}
+                              <h5></h5>
+                              {% else %}
+                              <h5 style='display:inline;'> {{object.Hoogte }} </h5>
+                              {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12  col-sm-12 col-md-1 col-lg-1 col-xl-1   ">
+                        <div class="row">
+                            <div class="pl-4 col-7 col-sm-7 d-md-none">
+                                <h5><strong>Prijs:</strong></h5>
+                            </div>
+                            <div class="col-5 col-sm-5 col-md-12">
+                              {% if user.is_authenticated %}
+                                <h5>{{object.Prijs}},- </h5>
+                              {% else %}
+                              <h5></h5>
+                              {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2   ">
+                        <div class="row">
+                            <div class="pl-4 col-7 col-sm-7 d-md-none">
+                                <h5><strong>Extra Info:</h5>
+                            </div>
+                            <div class="col-5 col-sm-5 col-md-12">
+                                {% if object.Extra == 'nan' %}
+                                <h5></h5>
+                                {% else %}
+                                <h5>{{object.Extra}}</h5>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12 col-sm-12 col-md-6">
+            <a href="{% url 'Olis' %}"> <img class="img-fluid" style="height: 200; width: 250px;" src="{% static 'Products/media/Olis.png' %}" alt=" Olis Logo" /></a>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6">
+            <h4>Olis heeft als lid van de ALI-groep een enorm assortiment; groot keukenapparatuur, koelingen, koel vriescellen, blast chilles, vaatwasmachines en keukenmeubilair.</h4>
+            <br />
+        </div>
+    </div>
+</div>
+<div class="olisbg">
+    <div class="row mt-5">
+        <div class="col-xl-12">
+            <h2 class="text-center"> 5 Kooklijnen van Olis:</h2>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12 col-sm-12 col-md-6">
+            <img class="img-fluid Olispicture" src="{% static 'Products/media/650picture.jpg' %}" alt="Olis 650 Lijn" />
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 text-center">
+            <h3>650 Lijn:</h3>
+            <h4>
+                De 650 Lijn omvat apparaten voor de kleinere keuken zoals sportkantines, bedrijfsrestaurants en café's.
+            </h4>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12 col-sm-12 col-md-6">
+            <img class="img-fluid Olispicture" src="{% static 'Products/media/700picture.jpg' %}" alt="Olis 700 Lijn" />
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 text-center">
+            <h3>700 Lijn:</h3>
+            <h4>De 700 Lijn bevat apparaten voor de middelgrote keuken zoals brasseries, eetcafés, restaurants en cateringbedrijven.</h4>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12 col-sm-12 col-md-6">
+            <img class="img-fluid Olispicture" src="{% static 'Products/media/900picture.jpg' %}" alt="Olis 900 Lijn" />
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 text-center">
+            <h3>900 Lijn:</h3>
+            <h4>De 900 Lijn bevat apparaten voor de grote restaurantkeuken met een hoge productiecapaciteit.</h4>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12 col-sm-12 col-md-6 ">
+            <img class="img-fluid Olispicture" src="{% static 'Products/media/XXLpicture.jpg' %}" alt="XXL Lijn" />
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 text-center">
+            <h3>XXL Lijn:</h3>
+            <h4>De Olis XXL Lijn bevat grote losse apparatuur met een hoge capaciteit.</h4>
+        </div>
+    </div>
+    <div class="row mt-5 mb-5">
+        <div class="col-12 col-sm-12 col-md-6">
+            <img class="img-fluid Olispicture" src="{% static 'Products/media/dropinpicture.png' %}" alt="Olis Dropin Lijn" />
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 text-center">
+            <h3>DropIn Lijn:</h3>
+            <h4>De Olis dropIn Lijn bevat apparatuur die gemonteerd kan worden in het aanrechtblad.</h4>
+        </div>
+    </div>
+</div>
+<div class="olisbg">
+    <div class="row mt-5">
+        <div class="col-xl-12">
+            <h2 class="text-center">Contact:</h2>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-12 text-center mt-5">
+            <h4> Wilt u contact met ons opnemen? Vul dan het contactformulier in:</h4>
+        </div>
+        <div class="col-12 text-center">
+              <a href="{% url 'Contact' %}"> <button type="button" class="btn btn-danger" name="button">Contact</button></a>
+        </div>
+        <div class="col-12 text-center mb-5">
+            <h4>
+                Aanvragen kunnen ook via <a href="mailto:info@vandervliet.nl">info@vandervliet.nl</a>  of bellen naar <a href="tel:030-6925915">030-6925915. </a>
+            </h4>
+        </div>
+    </div>
+</div>
+{% endif %}
+{%  endblock %}

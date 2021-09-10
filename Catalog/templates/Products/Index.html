@@ -1,0 +1,74 @@
+{% extends 'Products/layout.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container-fluid homepage ">
+  <div class="container">
+  <br>
+    <h1>Van der Vliet Professionele Keukenapparatuur</h1>
+<br>
+  <div class="text-justify">
+<h5> Gevestigd aan de Huis ter Heideweg 11 in Zeist. Bij ons kunt u terecht voor uw professionele horeca keukenapparatuur met een hoge kwaliteit en betrouwbaarheid. </h5><br>
+<h5>Wij zijn gespecialiseerd in apparaten van Olis en Giorik. Heeft u interesse in een van onze apparaten en wilt u een scherpe offerte, neem dan contact met ons op via het onderstaande contact formulier of bel naar <a href="tel:030-6925915">030-6925915.</a></h5><br>
+
+<h5>De prijzen die worden weergeven op de website zijn adviesprijzen. Neem contact op voor een scherpe offerte of een inruilkorting met uw huidige apparatuur.</h5>
+  </div>
+
+  </div>
+</div>
+
+<div class="container frontblock">
+    <div class="row ">
+
+        <div  class="col-12 col-sm-12 col-md-6 logo">
+          <div class="row">
+            <div class="logo-center">
+            <a href="{% url 'Giorik' %}" ><img class="img-fluid" src="{% static 'Products/media/Giorik.JPG' %}" style='width: 400px;'  alt="Giorik Logo"></a>
+                </div>
+          </div>
+          <div class="row">
+            <div class="logo-center">
+            <a href="{% url 'Giorik' %}"> <button  type="button" class="btn btn-danger active" role="button">Giorik pagina</button> </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-6 logo">
+          <div class="row">
+            <div class="logo-center">
+              <a href="{% url 'Olis' %}"> <img  class="img-fluid" src="{% static 'Products/media/Olis.png' %}"  alt=" Olis Logo"></a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="logo-center">
+              <a href="{% url 'Olis' %}"> <button href="#######"  type="Submit" class="btn btn-danger active" role="button" >Olis Pagina</button></a>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<div class="olisbg">
+    <div class="row mt-5">
+        <div class="col-xl-12">
+            <h2 class="text-center">Contact:</h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-12 text-center mt-5">
+            <h4> Wilt u contact met ons opnemen? Vul dan het contactformulier in:</h4>
+        </div>
+        <div class="col-12 text-center">
+              <a href="{% url 'Contact' %}"> <button type="button" class="btn btn-danger" name="button">Contact</button></a> 
+        </div>
+      <div class="col-12 text-center mb-5">
+        <h4>
+            Aanvragen kunnen ook via <a href="mailto:info@vandervliet.nl">info@vandervliet.nl</a>  of bellen naar <a href="tel:030-6925915">030-6925915. </a>
+        </h4>
+    </div>
+  </div>
+</div>
+{%  endblock %}

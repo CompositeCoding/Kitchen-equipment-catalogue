@@ -1,0 +1,165 @@
+{% extends 'Products/layout.html' %}
+{% load static %}
+{% block content %}
+<nav class="navbar navbar-expand-lg productnav">
+   <div class="container">
+      <div class="dropdown">
+         <button class="btn btn-danger m-0 pt-2" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">650</button>
+         <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            {% for b in 650L %}
+            <a class="dropdown-item" href="{% url 'Olis' '650' b %}">{{b}}</a>
+            {% endfor %}
+         </div>
+      </div>
+      <div class="dropdown">
+         <button class="btn btn-danger  m-0 p-2" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">700</button>
+         <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            {% for b in 700L %}
+            <span style="font-size: 14px;"><a class="dropdown-item mt-0 mb-0" href="{% url 'Olis' '700' b %}">{{b}}</a></span>
+            {% endfor %}
+         </div>
+      </div>
+      <div class="dropdown">
+         <button class="btn btn-danger  m-0 p-2" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">900</button>
+         <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            {% for b in 900L %}
+            <a class="dropdown-item" href="{% url 'Olis' '900' b %}">{{b}}</a>
+            {% endfor %}
+         </div>
+      </div>
+      <div class="dropdown">
+         <button class="btn btn-danger  m-0 p-2 "type="button" id="dropdownMenu1" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">XXL</button>
+         <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            {% for b in XXL %}
+            <a class="dropdown-item" href="{% url 'Olis' 'XXL' b %}">{{b}}</a>
+            {% endfor %}
+         </div>
+      </div>
+      <div class="btn-group  dropdown dropleft">
+         <button class="btn btn-danger m-0 p-2" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropin</button>
+         <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            {% for b in drop %}
+            <a class="dropdown-item" href="{% url 'Olis' 'dropin' b %}" >{{b}}</a>
+            {% endfor %}
+         </div>
+      </div>
+   </div>
+</nav>
+<div class="container text-center mt-5 mb-5">
+    <h1> {{object.Typenummer}}</h1>
+</div>
+<div class="container">
+   <div class="row">
+      <div class="col-12 col-md-5 ">
+         <img class="img-fluid detailimage" src="{%static 'Products/productimageOlis/'%}{{object.Typenummer}}.jpg"  alt="" >
+      </div>
+      <div class="col-12 col-md-7">
+         <div class="row">
+            <div class="col-7">
+               <h5><strong>kW + Voltage:</strong></h5>
+            </div>
+            <div class="col-5 d-flex text-justify-center">
+               {% if object.kW == ' ' %}
+               {% else %}
+               <h5>{{object.kW}} kW &nbsp;</h5>
+               {% endif %}
+               {% if object.Voltage == None %}
+               {% else %}
+               <h5> + {{object.Voltage}} V</h5>
+               {% endif %}
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-7">
+               <h5><strong>Aansluiting:</strong></h5>
+            </div>
+            <div class="col-5 d-flex text-justify-center">
+               {% if object.Aansluiting == 'nan' %}
+               <h5>-</h5>
+               {% elif object.Aansluiting == 'Elektrisch' %}
+               <h5><i class="fa fa-bolt"></i> {{object.Aansluiting}}</h5>
+               {% elif object.Aansluiting == 'Gas' %}
+               <h5><i class="fa fa-fire"></i> {{object.Aansluiting}}</h5>
+               {% else %}
+               <h5>  <i class="fa fa-fire"></i> <i class="fa fa-bolt"></i> {{object.Aansluiting}}</h5>
+               {% endif %}
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-7">
+               <h5><strong>Inhoud:</strong></h5>
+            </div>
+            <div class="col-5 d-flex text-justify-center">
+               {% if object.Inhoud == 'nan' %}
+               <h5></h5>
+               {% else %}
+               <h5>{{object.Inhoud}}</h5>
+               {% endif %}
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-7">
+               <h5><strong>Afmetingen B+D+H:</strong></h5>
+            </div>
+            <div class="col-5 d-flex text-justify-center">
+              {% if object.Breedte == 'nan' %}
+                 <h5></h5>
+              {% else %}
+              <h5 style='display:inline;'>{{object.Breedte}} x &nbsp; </h5>
+              {% endif %}
+              {% if object.Diepte == 'nan' %}
+              <h5></h5>
+              {% else %}
+              <h5 style='display:inline;'> {{object.Diepte}} x &nbsp; </h5>
+              {% endif %}
+              {% if object.Hoogte == 'nan' %}
+              <h5></h5>
+              {% else %}
+              <h5 style='display:inline;'> {{object.Hoogte }} </h5>
+              {% endif %}
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-7">
+               <h5><strong>Prijs:</strong></h5>
+            </div>
+            <div class="col-5 d-flex text-justify-center">
+              {% if user.is_authenticated %}
+                <h5>{{object.Prijs}},- </h5>
+              {% else %}
+              <h5></h5>
+              {% endif %}
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-7">
+               <h5><strong>Extra Info:</strong></h5>
+            </div>
+            <div class="col-5 d-flex text-justify-center">
+               {% if object.Extra == 'nan' %}
+               <h5></h5>
+               {% else %}
+               <h5>{{object.Extra}}</h5>
+               {% endif %}
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="container mt-5">
+   <div class="row mb-5">
+       <div class="col-12 text-center mt-5">
+           <h4> Wilt u meer informatie, een schematische tekening of bent u benieuwd naar een scherpe korting? <br><br> Stel uw vraag dan in het contactformulier en vermeld daarbij het typenummer.</h4>
+       </div>
+       <div class="col-12 text-center">
+             <a href="{% url 'Contact' %}"> <button type="button" class="btn btn-danger" name="button">Contact</button></a>
+       </div>
+       <div class="col-12 text-center mb-5">
+           <h4>
+               Aanvragen kunnen ook via <a href="mailto:info@vandervliet.nl">info@vandervliet.nl</a>  of bellen naar <a href="tel:030-6925915">030-6925915. </a>
+           </h4>
+       </div>
+   </div>
+</div>
+{%  endblock %}

@@ -1,0 +1,98 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.logo-center {
+  float: none;
+  margin: 0 auto;
+}
+
+.homepage {
+  background-color: rgba(153, 184, 199, 0.2);
+  padding-bottom: 25px;
+  padding-top: 25px;
+  flex: 1;
+}
+
+.productnav {
+  background-color: rgba(153, 184, 199, 0.2);
+}
+
+.olisbg {
+  background-color: rgba(153, 184, 199, 0.1);
+}
+
+.productheader {
+  border-bottom: 0.5px solid black;
+}
+
+.productdata {
+  border: 1px solid black;
+}
+
+.btn {
+  margin: 75px;
+}
+
+.logo {
+  margin-top: 25px;
+  height: 250px;
+  width: 300px;
+}
+
+.detailimage {
+  height: 250px;
+  width: 300px;
+}
+
+.Gioikdetailimage {
+  height: 275px;
+  width: 350px;
+}
+
+.productimage {
+  height: 120px;
+}
+
+.frame {
+  margin-left: 70px;
+  margin-right: 70px;
+  border: solid;
+  text-align: center;
+  border-color: rgba(153, 184, 199, 0.4);
+}
+
+.seperator {
+  margin-bottom: 100px;
+  margin-top: 100px;
+  flex: 1;
+}
+
+.sidbarwrap {
+  flex: 1;
+  width: 100%;
+}
+
+.Olispicture {
+  height: 200px;
+  width: 350px;
+  ;
+}
+
+.Dropdownbutton {
+  background-color: rgba(153, 184, 199, 0.4);
+  color: black;
+  width: 100%;
+}
+
+.container-fluid {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+  margin-left: 0px;
+  padding-left: 0px;
+}

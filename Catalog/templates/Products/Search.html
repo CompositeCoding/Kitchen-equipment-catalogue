@@ -1,0 +1,74 @@
+{% extends 'Products/layout.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+   <div class="container text-center mb-5 mt-5">
+      <h1>Zoek een apparaat op basis van naam of typenummer:</h1>
+   </div>
+   <form>
+      <div class="form-group">
+         <label for="Apparaat">Zoeken: </label>
+         <input type="text" id="Apparaat" class="form-control" name="Apparaat" id="Apparaat" aria-describedby="emailHelp" placeholder="">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+   </form>
+</div>
+{% if query %}
+<div class="container">
+   <div class="container">
+      <div class="row">
+         <div class="col-3 ">
+            <h5><strong>Typenummer</strong></h5>
+         </div>
+         <div class="col-4 ">
+            <h5><strong>Categorie</strong></h5>
+         </div>
+         <div class="col-2">
+            <h5><strong>Bedrijf:</strong></h5>
+         </div>
+         <div class="col-3  ">
+            <h5><strong>Prijs:</strong></h5>
+         </div>
+      </div>
+   </div>
+   {% for object in query %}
+   <div class="container">
+      <div class="row">
+         <div class="col-3 ">
+            {% if object.Bedrijf == 'Olis' %}
+            <a href="{% url 'OlisProduct' object.Typenummer %}">
+               <h5 class="pl-4 pb-5 "><strong>{{object.Typenummer}}</strong></h5>
+            </a>
+            {% elif object.Bedrijf == 'Giorik' %}
+            <a href="{% url 'GiorikProduct' object.Typenummer %}">
+               <h5 class="pl-4 pb-5 "><strong>{{object.Typenummer}}</strong></h5>
+            </a>
+            {% endif %}
+         </div>
+         <div class="col-4 ">
+            {% if object.Bedrijf == 'Olis' %}
+            <a href="{% url 'Olis' object.Lijn object.Categorie  %}">
+               <h5 class="pl-4 pb-5 "><strong>{{object.Categorie}}</strong></h5>
+            </a>
+            {% elif object.Bedrijf == 'Giorik' %}
+            <a href="{% url 'Giorik' object.Lijn object.Categorie  %}">
+               <h5 class="pl-4 pb-5 "><strong>{{object.Categorie}}</strong></h5>
+            </a>
+            {% endif %}
+         </div>
+         <div class="col-2">
+            <h5>{{object.Bedrijf}}</h5>
+         </div>
+         <div class="col-3  ">
+           {% if user.is_authenticated %}
+             <h5>{{object.Prijs}},- </h5>
+           {% else %}
+           <h5>-</h5>
+           {% endif %}
+         </div>
+      </div>
+   </div>
+   {% endfor %}
+</div>
+{% endif %}
+{%  endblock %}
