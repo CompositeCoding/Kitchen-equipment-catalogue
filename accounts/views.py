@@ -7,7 +7,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 def RegisterView(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
-        
+
         if form.is_valid():
             username = form.cleaned_data.get('bedrijfsnaam')
             raw_password = form.cleaned_data.get('password')
@@ -28,7 +28,6 @@ class Logout(LogoutView):
     template_name = 'login.html'
     redirect_authenticated_user = True
     form = LoginView
-
 
 def ContactView(request):
     if request.method == 'POST':

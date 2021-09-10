@@ -1,12 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Products
 from django.views.generic.list import ListView
 from django.http import JsonResponse
 from django.views.generic.edit import FormMixin, FormView
 from django.views.generic.list import MultipleObjectMixin
 from django.core.paginator import Paginator
+from .load_data import load_data
 
-LIJNEN = ['650L','700L','900L','XXL','drop']
+LIJNEN = ['650L','700L','900L','drop']
 LIJNENGIORIK = ['Dropin600','60Snackline','FriteusesEnOvens','Salamanders']
 
 def Index(request):
@@ -105,3 +106,7 @@ class GiorikProductView(MultipleObjectMixin, FormView):
     def form_valid(self, form):
         form.send_email(self.kwargs.get("typenummer"))
         return super().form_valid(form)
+
+def load(request):
+    load_data()
+    return redirect('Index')

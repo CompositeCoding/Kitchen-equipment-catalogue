@@ -19,7 +19,7 @@
             {% endfor %}
          </div>
       </div>
-      <div class="dropdown">
+      <div class="dropdown dropleft">
          <button class="btn btn-danger  m-0 p-2" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">900</button>
          <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
             {% for b in 900L %}
@@ -27,15 +27,7 @@
             {% endfor %}
          </div>
       </div>
-      <div class="dropdown">
-         <button class="btn btn-danger  m-0 p-2 "type="button" id="dropdownMenu1" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">XXL</button>
-         <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            {% for b in XXL %}
-            <a class="dropdown-item" href="{% url 'Olis' 'XXL' b %}">{{b}}</a>
-            {% endfor %}
-         </div>
-      </div>
-      <div class="btn-group  dropdown dropleft">
+      <div class="dropdown dropleft">
          <button class="btn btn-danger m-0 p-2" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropin</button>
          <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
             {% for b in drop %}
