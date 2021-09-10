@@ -4,7 +4,8 @@ Product Catalogue for Professional Kitchen equipment
 
 ######################################################################
 
-First (large) project that I have completed. There is room for expansion such a dedicated
+First (large) project that I have completed. To my regrets not fully
+compliant with PEP8. There is room for expansion such a dedicated
 environment for logged in users but as of today this project includes:
 
 - Authentication with custom user class
