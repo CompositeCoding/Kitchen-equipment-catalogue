@@ -1,0 +1,22 @@
+######################################################################
+
+Product Catalogue for Professional Kitchen equipment
+
+######################################################################
+
+First (large) project that I have completed. There is room for expansion such a dedicated
+environment for logged in users but as of today this project includes:
+
+- Authentication with custom user class
+- Content changes based on Authentication
+- Structured information architecture based on domain specific content
+- Search functionality
+- Email functionality
+
+######################################################################
+
+To run:
+
+pip install -r requirement.txt
+
+python manage.py runserver

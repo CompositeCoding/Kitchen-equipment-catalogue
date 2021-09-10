@@ -5,6 +5,9 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView, LogoutView
 
 def RegisterView(request):
+
+    """ View for registration form """
+
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
 

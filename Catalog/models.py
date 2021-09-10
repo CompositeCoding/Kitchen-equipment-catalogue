@@ -17,3 +17,6 @@ class Products(models.Model):
     Prijs = models.IntegerField()
     Extra = models.CharField(max_length=500, null=True)
     Bedrijf = models.CharField(max_length=30, null=False)
+
+    def __str__(self):
+        return self.Typenummer

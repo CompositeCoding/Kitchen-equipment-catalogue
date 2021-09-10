@@ -14,55 +14,78 @@ def Index(request):
     return render(request, 'Products/Index.html')
 
 class OlisListView(ListView):
+
+    """ View for Olis products taking argument from url and showing data accordingly """
+
     model = Products
     template_name = 'Products/Olis.html'
+
     def get_context_data(self, **kwargs):
         context = super(OlisListView, self).get_context_data(**kwargs)
-        UrlVariable = self.kwargs.get("urlsearch")
-        UrLVariableLijn = self.kwargs.get("Lijn")
+        url_variable = self.kwargs.get("urlsearch")
+        url_variable_lijn = self.kwargs.get("Lijn")
+
         for lijn in LIJNEN:
             context[lijn] = sorted(list(set([i.Categorie for i in Products.objects.filter(Bedrijf__contains='Olis').filter(Lijn__contains=lijn[:3])])))
-        if UrlVariable:
-            queryset = Products.objects.filter(Lijn__contains=UrLVariableLijn)
-            queryset2 = Products.objects.filter(Categorie__iexact=UrlVariable)
-            context['Cat'] = UrlVariable
+
+        # This takes the kwarg from url and queries db for product which are added to the context
+        if url_variable:
+            queryset = Products.objects.filter(Lijn__contains=url_variable_lijn)
+            queryset2 = Products.objects.filter(Categorie__iexact=url_variable)
+            context['Cat'] = url_variable
             result = queryset.intersection(queryset2)
             context['query'] = result.order_by('-Prijs')
+
         return context
 
 class GiorikListView(ListView):
+
+    """ View for Giorik products taking argument from url and showing data accordingly """
+
     model = Products
     template_name = 'Products/Giorik.html'
+
     def get_context_data(self, **kwargs):
         context = super(GiorikListView, self).get_context_data(**kwargs)
-        UrlVariable = self.kwargs.get("urlsearch")
-        UrLVariableLijn = self.kwargs.get("Lijn")
+        url_variable = self.kwargs.get("urlsearch")
+        url_variable_lijn = self.kwargs.get("Lijn")
+
         for lijn in LIJNENGIORIK:
             context[lijn] = sorted(list(set([i.Categorie for i in Products.objects.filter(Lijn__contains=lijn)])))
-        if UrlVariable:
-            # queryset = Products.objects.filter(Bedrijf__iexact='Olis').filter(Lijn__contains=self.kwargs.get("Lijn"))
-            queryset = Products.objects.filter(Lijn__contains=UrLVariableLijn)
-            queryset2 = Products.objects.filter(Categorie__iexact=UrlVariable)
-            context['Cat'] = UrlVariable
+
+        # This takes the kwarg from url and queries db for product which are added to the context
+        if url_variable:
+            queryset = Products.objects.filter(Lijn__contains=url_variable_lijn)
+            queryset2 = Products.objects.filter(Categorie__iexact=url_variable)
+            context['Cat'] = url_variable
             result = queryset.intersection(queryset2)
             context['query'] = result.order_by('-Prijs')
+
         return context
 
 def SearchView(request):
-    context = dict()
 
+    """ View for providing search results to user search """
+
+    context = dict()
     if 'Apparaat' in request.GET:
         queryset = Products.objects.filter(Typenummer__contains=request.GET.get('Apparaat').upper())
         queryset2 = Products.objects.filter(Categorie__contains=request.GET.get('Apparaat'))
+
         if len(queryset.union(queryset2)) == 0:
             context['available'] = "This entity was not found in the database"
+
         else:
             context['query'] = queryset.union(queryset2).order_by('Categorie')
+
         return render(request, 'Products/Search.html',context)
+
     return render(request,'Products/Search.html',context)
 
 
 class OlisProductView(MultipleObjectMixin, FormView):
+
+    """ View for a single product from Olis, used to have form, might implement that later"""
 
     model = Products
     template_name = 'Products/Olisproduct.html'
@@ -72,8 +95,10 @@ class OlisProductView(MultipleObjectMixin, FormView):
     def get_context_data(self, **kwargs):
         context = dict()
         type = self.kwargs.get("typenummer")
+
         for lijn in LIJNEN:
             context[lijn] = sorted(list(set([i.Categorie for i in Products.objects.filter(Bedrijf__contains='Olis').filter(Lijn__contains=lijn[:3])])))
+
         if type:
             queryset = Products.objects.filter(Typenummer__iexact=type.upper())
             context['object'] = queryset[0]
@@ -86,6 +111,8 @@ class OlisProductView(MultipleObjectMixin, FormView):
         return super().form_valid(form)
 
 class GiorikProductView(MultipleObjectMixin, FormView):
+
+    """ View for a single product from Giorik, used to have form, might implement that later"""
 
     model = Products
     template_name = 'Products/Giorikproduct.html'
