@@ -125,8 +125,8 @@ USE_TZ = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp-mail.outlook.com'
-EMAIL_HOST_USER = "casper-vliet@hotmail.com"
-EMAIL_HOST_PASSWORD = '4jnktr7G)^!!)&!&%('
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = '587'
 
 
